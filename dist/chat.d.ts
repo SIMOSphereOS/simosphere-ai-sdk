@@ -1,0 +1,19 @@
+import { SIMOSphereClient } from './client';
+import type { ChatCompletionParams, ChatCompletionResponse } from './types';
+/**
+ * Thin convenience wrapper that delegates to `SIMOSphereClient.chat()`.
+ *
+ * Use this when you want a standalone function instead of a method call:
+ *
+ * ```ts
+ * import { createChat } from '@simosphere/sdk';
+ *
+ * const chat = createChat({ apiKey: process.env.SIMOSPHERE_API_KEY! });
+ * const res  = await chat({ messages: [{ role: 'user', content: 'Hello' }] });
+ * ```
+ */
+export declare function createChat(clientOrOpts: SIMOSphereClient | {
+    apiKey: string;
+    baseUrl?: string;
+}): (params: ChatCompletionParams) => Promise<ChatCompletionResponse>;
+//# sourceMappingURL=chat.d.ts.map

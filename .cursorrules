@@ -1,0 +1,78 @@
+SIMOSphere AI Marketing Hub — Cursor Rules
+
+Repo: simosphereai.com (public marketing surface for SIMOSphere AI by SIMO GmbH, Aschaffenburg, Germany)
+Stack: static HTML + thin PHP templating, Apache + Cloudflare CDN, no DB on this host
+Deploy: rsync to Webgo shared hosting (s121.goserver.host), human-gated only
+
+== Read-first context (load before any edit) ==
+- CLAUDE.md (binding)
+- AGENTS.md (binding)
+- docs/plans/2026-05-05-relaunch-charta.md (binding)
+- The specific page file being edited (do not pattern-match across pages)
+
+== Brand & CI ==
+1. Brand colours are #000033 (dark BG), #FFFFFF (light BG), #5EBFBF (Teal accent), #4AB1B8 (Teal hover). Do not invent colours.
+2. Headline rule: "Ihre Daten" = Uni Neue Bold + Teal #5EBFBF; "bleiben Ihre Daten." = Regular + #F2F2F2 (dark) / #252626 (light).
+3. Two-part-heading pattern only — never single-colour all-caps.
+4. Liquid-Glass aesthetic: backdrop-filter blur(20px), border-radius ≥ 12px, Teal glow, dark mode default.
+5. Fonts: UniNeue (display) + Inter (text). Do not add web fonts.
+6. Logos and icons live in assets/img/; never inline base64 logos.
+
+== Internationalisation ==
+7. Every user-visible string is DE + EN, idiomatic in each language (no 1:1 machine translation).
+8. Use `t()` and `tValue()` from `lib/template.php`. Strings live in JSON dictionaries under `i18n/`.
+9. Date/number formatting via locale helpers, never hardcoded.
+
+== Responsive & UX ==
+10. Three layouts: mobile ≤ 767 px, iPad 768–1199 px, desktop ≥ 1200 px. Test all three.
+11. No mouseover-only tooltips on iPad — use tap+tooltip pattern.
+12. Touch targets ≥ 44×44 px on mobile.
+
+== Performance budget ==
+13. Lighthouse ≥ 95 across all four scores on desktop and mobile.
+14. LCP < 2.0 s, CLS < 0.05, INP < 200 ms.
+15. No new third-party scripts without a Cookiebot consent wrapper.
+16. Images: WebP or AVIF, width attribute set, lazy-load below the fold.
+
+== Accessibility ==
+17. WCAG 2.2 AA across the site.
+18. Exactly one `<h1>` per page.
+19. Never set `outline: none` on focusable elements without a visible replacement.
+20. `prefers-reduced-motion: reduce` honoured by all animations.
+21. Colour-contrast ratio ≥ 4.5:1 for body text, ≥ 3:1 for large text.
+
+== Content authenticity (Charta-Pflicht) ==
+22. Every claim needs one of: a published source, a measured number, or an explicit conditional ("nach Herstellerangaben", "geplant für Q3 2026").
+23. Forbidden words: "revolutionär", "next-generation", "AI-powered", "Game-Changer", "disruptiv" (unless it is a literal product name).
+24. Prices are pulled from `config/pricing.php` — never hardcoded in marketing copy.
+
+== Stripe & checkout ==
+25. Fixed-fee packages use Stripe Payment Links; custom scopes use the discovery-call form.
+26. Stripe placeholders look like `STRIPE_LINK_TODO_<id>` — replace from `config/stripe-links.php`.
+27. Live Stripe keys must NEVER be committed; only `pk_live_…` (publishable) ever leaves the server, and only via runtime template.
+
+== Secrets & env handling ==
+28. Secrets live in `.env` (gitignored) or in the production server's env. Never in code, never in commits, never in docs.
+29. If a secret is suspected leaked: rotate immediately, then `git filter-repo` the file out of history, then force-push with sign-off.
+
+== Git workflow ==
+30. Branch from `main` only. Prefix: `feat|fix|docs|refactor|test/short-description`.
+31. One logical change per commit.
+32. Commit message prefix: `feat|fix|docs|refactor|test:`.
+33. Sign every commit with `Co-Authored-By: SIMO GmbH, Aschaffenburg, Bavaria Germany`.
+34. NEVER reference Claude, Anthropic, OpenAI, GitHub Copilot, or any AI tool name in commits, PRs, code comments, or UI text.
+35. PRs via `gh pr create`. No direct push to `main`.
+36. Pre-push checklist: `php -l` on changed PHP files, smoke in browser at 390 / 1024 / 1440 px, switch DE/EN.
+
+== Deploy discipline ==
+37. NEVER deploy from an editor. Deploy is the rsync command in CLAUDE.md, run by a human with the key.
+38. After deploy: bump `APP_VERSION`, reset CompiledContainer/Twig/OPcache, purge Cloudflare cache, run Playwright smoke.
+
+== SDK & CLI references ==
+39. The official TypeScript SDK is `@simosphere/sdk` (source: `simosphere-ai-api-platform/packages/sdk/`). Link to it from developer pages but do not duplicate its source here.
+40. The CLI is `@simosphere/cli` (source: `simosphere-ai-api-platform/packages/cli/`). Commands: `simosphere health`, `simosphere models`, `simosphere chat "..."`, `simosphere ask "..."`.
+41. SDK quick-start: `import { SIMOSphereClient } from '@simosphere/sdk'` then `new SIMOSphereClient({ apiKey })`.
+
+== Where things do NOT belong in this repo ==
+42. No backend logic, no customer data, no tenant onboarding — those live in `simosphere-ai-api-platform`.
+43. No Cloudflare Tunnel config, no PM2 ecosystem, no Prisma schemas — same separation.

@@ -1,0 +1,27 @@
+{
+  "name": "@simosphere/sdk",
+  "version": "0.1.0",
+  "description": "Official SIMOSphere AI SDK — European AI orchestration platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/SIMOSphereOS/simosphere-ai-sdk",
+  "homepage": "https://simosphereai.com/de/developers",
+  "license": "MIT",
+  "keywords": [
+    "simosphere",
+    "ai",
+    "llm",
+    "mcp",
+    "gdpr",
+    "eu-ai-act",
+    "orchestration"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
