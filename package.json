@@ -1,20 +1,33 @@
 {
   "name": "@simosphere/sdk",
-  "version": "0.1.0",
-  "description": "Official SIMOSphere AI SDK — European AI orchestration platform",
+  "version": "0.1.1",
+  "description": "Official SIMOSphere AI SDK — European AI orchestration platform. OpenAI-compatible, GDPR-compliant, EU-hosted.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/SIMOSphereOS/simosphere-ai-sdk",
-  "homepage": "https://simosphereai.com/de/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SIMOSphereOS/simosphere-ai-sdk.git"
+  },
+  "homepage": "https://simosphereai.com/en/docs",
+  "bugs": {
+    "url": "https://github.com/SIMOSphereOS/simosphere-ai-sdk/issues"
+  },
   "license": "MIT",
   "keywords": [
     "simosphere",
     "ai",
+    "sdk",
     "llm",
     "mcp",
     "gdpr",
     "eu-ai-act",
-    "orchestration"
+    "eu-hosted",
+    "germany",
+    "openai-compatible",
+    "orchestration",
+    "inference",
+    "chat-completions",
+    "embeddings"
   ],
   "scripts": {
     "build": "tsc",
