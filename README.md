@@ -1,3 +1,19 @@
+> # ⛔ Stillgelegt · Umzug zu GitLab / Decommissioned · Migrated to GitLab
+>
+> **DE:** Dieses Repository ist zum **2026-06-15** **stillgelegt** und nur noch als **Archiv (read-only)** vorhanden. Aktiver Stand inkl. Issues, Merge Requests und Wiki liegt ab sofort ausschließlich auf der internen **GitLab**-Instanz der SIMO GmbH.
+>
+> **EN:** As of **2026-06-15** this repository is **decommissioned** and kept **read-only** for archival. Active development, issues, merge requests and wiki now live exclusively on SIMO GmbH's internal **GitLab** instance.
+>
+> ➡️ **Neuer Ort / New location:** https://gitlab.simo-online.com/simosphereos/simosphere-ai-sdk
+>
+> ```
+> git remote set-url origin https://gitlab.simo-online.com/simosphereos/simosphere-ai-sdk.git
+> ```
+>
+> _SIMO GmbH, Aschaffenburg — 2026-06-15_
+
+---
+
 <div align="center">
 
 # @simosphere/sdk
